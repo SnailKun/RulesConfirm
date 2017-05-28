@@ -1,0 +1,35 @@
+#DO NOT CHANGE THIS!!!
+version: 1
+
+################################################
+##COLOR CODES DO NOT WORK IN THIS CONFIG YET!!##
+################################################
+
+prefix: "Rules Confirm"
+
+messages:
+    pass: "You have passed"
+    #Type %score% to insert the score of the player
+    fail: "You have failed. You scored %score%"
+
+restrictions:
+    move:
+        enabled: true
+        message: You may not do that until you have taken a test on the rules with /rulesconfirm
+    chat:
+        enabled: true
+        message: You may not do that until you have taken a test on the rules with /rulesconfirm
+    
+confirm:
+    enabled: true
+    #in seconds
+    time: 5
+    start_timer_message: "You must now wait 5 seconds before taking the test again"
+    end_timer_message: "You may now take the test again"
+#Percent
+passing_grade: 80
+
+test_inventory_title: "Rules Test"
+
+questions:
+- "false:Should You Grief"

@@ -1,0 +1,14 @@
+name: RulesConfrim
+version: 0.1
+main: net.snailz.rulesconfirm.RulesConfirm
+author: Snailz
+commands:
+    rulesconfirm:
+        permission: rulesconfirm.test
+        usage: /rulesconfirm
+        description: Start the test to see if you read the rules
+
+permissions:
+    rulesconfirm.test:
+        description: Allows you to take the test to see if you read the rules
+        default: true
