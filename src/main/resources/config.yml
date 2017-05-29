@@ -15,10 +15,10 @@ messages:
 restrictions:
     move:
         enabled: true
-        message: You may not do that until you have taken a test on the rules with /rulesconfirm
+        message: "You may not do that until you have taken a test on the rules with /rulesconfirm"
     chat:
         enabled: true
-        message: You may not do that until you have taken a test on the rules with /rulesconfirm
+        message: "You may not do that until you have taken a test on the rules with /rulesconfirm"
     
 confirm:
     enabled: true
@@ -26,6 +26,8 @@ confirm:
     time: 5
     start_timer_message: "You must now wait 5 seconds before taking the test again"
     end_timer_message: "You may now take the test again"
+    #this is sent if the user does /rulesconfirm during there timer
+    timer_message: "You must wait before you can take the test again"
 #Percent
 passing_grade: 80
 

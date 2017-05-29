@@ -6,6 +6,7 @@
 package net.snailz.rulesconfirm;
 
 import java.util.HashMap;
+import java.util.logging.Level;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -29,7 +30,7 @@ public class TestTimer extends BukkitRunnable {
         if (!(AnswerCheck.failedplayers.isEmpty())) {
             for (Player player : AnswerCheck.failedplayers) {
                 if (playertime.get(player) == null) {
-                    playertime.put(player, time);
+                    playertime.put(player, 0);
                     player.sendMessage(plugin.prefix + ChatColor.RED + plugin.getConfig().getString("confirm.start_timer_message"));
                     break;
                 }
@@ -39,7 +40,7 @@ public class TestTimer extends BukkitRunnable {
                     player.sendMessage(plugin.prefix + ChatColor.GREEN + plugin.getConfig().getString("confirm.end_timer_message"));
                     break;
                 }
-                playertime.put(player, playertime.get(player) - 1);
+                playertime.put(player, playertime.get(player) + 1);
             }
         }
     }

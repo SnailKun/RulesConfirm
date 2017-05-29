@@ -66,8 +66,8 @@ public class GUI {
             //POSSIBLE BUG
             noteLore.add(0, moreinfo);
             noteMeta.setLore(noteLore);
-            note.setItemMeta(noteMeta);
         }
+        note.setItemMeta(noteMeta);
         inv.setItem(4, note);
         for(int x = 0; x <= 53; x++){
             if (x >= 0 && x <= 3 || x >= 9 && x <= 12 || x >= 18 && x <= 21 || x >= 27 && x <= 30 || x >= 36 && x <= 39 || x >= 45 && x <= 48){
@@ -80,7 +80,7 @@ public class GUI {
                 yes.setItemMeta(meta);
                 inv.setItem(x, yes);
             }
-            if (x == 4 || x == 13 || x == 22 || x == 31 || x == 40){
+            if (x == 13 || x == 22 || x == 31 || x == 40 || x == 49){
                 ItemStack seperate = new ItemStack(Material.BARRIER, 1);
                 ItemMeta meta = seperate.getItemMeta();
                 List lore = new ArrayList();
@@ -89,7 +89,7 @@ public class GUI {
                 seperate.setItemMeta(meta);
                 inv.setItem(x, seperate);
             }
-            if (x >= 5 && x <= 8 || x >= 14 && x <= 17 || x >= 23 && x <= 26 || x >= 32 && x <= 35 || x >= 41 && x <= 44){
+            if (x >= 5 && x <= 8 || x >= 14 && x <= 17 || x >= 23 && x <= 26 || x >= 32 && x <= 35 || x >= 41 && x <= 44 || x >= 50 && x <= 54){
                 ItemStack no = new ItemStack(Material.REDSTONE_BLOCK, 1);
                 ItemMeta meta = no.getItemMeta();
                 meta.setDisplayName(ChatColor.RED + "No");
@@ -106,7 +106,7 @@ public class GUI {
     }
     
     public void openConfirmGUI(Player player){
-        createQuestion(ConfirmStart,"0", "Are You Sure", "You may only take this test once every" + plugin.getConfig().getInt("confirm.time") + "minutes", player);     
+        createQuestion(ConfirmStart,"0", "Are You Sure", "You may only take this test once every " + plugin.getConfig().getInt("confirm.time") + " seconds", player);     
     }
     
 }

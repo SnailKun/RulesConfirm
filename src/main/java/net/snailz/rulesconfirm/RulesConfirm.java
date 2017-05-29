@@ -84,7 +84,7 @@ public class RulesConfirm extends JavaPlugin{
         this.saveDefaultPlayersFile();
         this.saveDefaultConfig();
         if (this.getConfig().getBoolean("confirm.enabled")){
-            this.getServer().getScheduler().runTaskTimer(this, new TestTimer(this), 0L, 10L);
+            this.getServer().getScheduler().runTaskTimer(this, new TestTimer(this), 20L, 20L);
         }
         this.getCommand("rulesconfirm").setExecutor(new RulesConfirmCommand(this, new GUI(this), new AnswerCheck(this, new GUI(this))));
         this.getServer().getPluginManager().registerEvents(new AnswerCheckEvent(this, new AnswerCheck(this, new GUI(this))), this);

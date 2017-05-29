@@ -5,6 +5,7 @@
  */
 package net.snailz.rulesconfirm;
 
+import java.util.logging.Level;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,13 +19,20 @@ import org.bukkit.event.player.PlayerMoveEvent;
 public class PlayerRestrict implements Listener{
     
     RulesConfirm plugin;
+    boolean chat;
+    boolean move;
+    String movemessage;
+    String chatmessage;
     
     public PlayerRestrict(RulesConfirm ins){
         plugin = ins;
+        move = plugin.getConfig().getBoolean("restrictions.move.enabled");
+        chat = plugin.getConfig().getBoolean("restrictions.chat.enabled");
+        movemessage = ChatColor.RED + plugin.getConfig().getString("restrictions.move.message");
+        chatmessage = ChatColor.RED + plugin.getConfig().getString("restrictions.chat.message");
     }
     
-    boolean move = plugin.getConfig().getBoolean("restrictions.move.enabled");
-    boolean chat = plugin.getConfig().getBoolean("restrictions.chat.enabled");
+
     
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e){
@@ -35,7 +43,7 @@ public class PlayerRestrict implements Listener{
             return;
         }
         e.setCancelled(true);
-        e.getPlayer().sendMessage(plugin.prefix + ChatColor.RED + plugin.getPlayersFile().getString("restrictions.move.message"));
+        e.getPlayer().sendMessage(plugin.prefix + movemessage);
     }
     
     @EventHandler
@@ -47,6 +55,6 @@ public class PlayerRestrict implements Listener{
             return;
         }
         e.setCancelled(true);
-        e.getPlayer().sendMessage(plugin.prefix + ChatColor.RED + plugin.getPlayersFile().getString("restrictions.chat.message"));
+        e.getPlayer().sendMessage(plugin.prefix + chatmessage);
     }
 }
