@@ -27,7 +27,7 @@ import net.snailz.rulesconfirm.GUI;
  */
 public class RulesConfirm extends JavaPlugin{
     
-    public String prefix = ChatColor.RED + "[" + ChatColor.LIGHT_PURPLE + getConfig().getString("prefix") + ChatColor.RED + "] " + ChatColor.RESET;
+    public String prefix = ChatColor.translateAlternateColorCodes('&', this.getConfig().getString("prefix")) + " " + ChatColor.RESET;
 //BEGIN CONFIG LOADING
     private FileConfiguration players = null;
     private File playersfile = null;
@@ -81,12 +81,19 @@ public class RulesConfirm extends JavaPlugin{
     }
 //END CONFIG LOADING
     public void onEnable(){
+        //START VERSION CHECK
+        int version = 2;
+        if (getConfig().getInt("version") != version){
+            this.getLogger().log(SEVERE, "Your config is outdated. This means that a new feature has been added that requires the config. Please save your config and delete your config");
+            this.getPluginLoader().disablePlugin(this);
+        }
+        //END VERSION CHECK
         this.saveDefaultPlayersFile();
         this.saveDefaultConfig();
         if (this.getConfig().getBoolean("confirm.enabled")){
             this.getServer().getScheduler().runTaskTimer(this, new TestTimer(this), 20L, 20L);
         }
-        this.getCommand("rulesconfirm").setExecutor(new RulesConfirmCommand(this, new GUI(this), new AnswerCheck(this, new GUI(this))));
+        this.getCommand("rulesconfirm").setExecutor(new RulesConfirmCommand(this, new GUI(this), new AnswerCheck(this, new GUI(this)), new ConfigCommand(this)));
         this.getServer().getPluginManager().registerEvents(new AnswerCheckEvent(this, new AnswerCheck(this, new GUI(this))), this);
         this.getServer().getPluginManager().registerEvents(new PlayerRestrict(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerKeyRemove(this), this);
