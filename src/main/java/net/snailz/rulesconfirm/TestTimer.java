@@ -31,13 +31,13 @@ public class TestTimer extends BukkitRunnable {
             for (Player player : AnswerCheck.failedplayers) {
                 if (playertime.get(player) == null) {
                     playertime.put(player, 0);
-                    player.sendMessage(plugin.prefix + ChatColor.RED + plugin.getConfig().getString("confirm.start_timer_message"));
+                    player.sendMessage(plugin.prefix + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("confirm.start_timer_message")));
                     break;
                 }
                 if (playertime.get(player) == time) {
                     AnswerCheck.failedplayers.remove(player);
                     playertime.remove(player);
-                    player.sendMessage(plugin.prefix + ChatColor.GREEN + plugin.getConfig().getString("confirm.end_timer_message"));
+                    player.sendMessage(plugin.prefix + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("confirm.end_timer_message")));
                     break;
                 }
                 playertime.put(player, playertime.get(player) + 1);

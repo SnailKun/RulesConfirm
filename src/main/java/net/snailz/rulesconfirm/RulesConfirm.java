@@ -86,6 +86,7 @@ public class RulesConfirm extends JavaPlugin{
         if (getConfig().getInt("version") != version){
             this.getLogger().log(SEVERE, "Your config is outdated. This means that a new feature has been added that requires the config. Please save your config and delete your config");
             this.getPluginLoader().disablePlugin(this);
+            return;
         }
         //END VERSION CHECK
         this.saveDefaultPlayersFile();
@@ -93,7 +94,7 @@ public class RulesConfirm extends JavaPlugin{
         if (this.getConfig().getBoolean("confirm.enabled")){
             this.getServer().getScheduler().runTaskTimer(this, new TestTimer(this), 20L, 20L);
         }
-        this.getCommand("rulesconfirm").setExecutor(new RulesConfirmCommand(this, new GUI(this), new AnswerCheck(this, new GUI(this)), new ConfigCommand(this)));
+        this.getCommand("rulesconfirm").setExecutor(new RulesConfirmCommand(this, new GUI(this), new AnswerCheck(this, new GUI(this)), new AdminCommands(this)));
         this.getServer().getPluginManager().registerEvents(new AnswerCheckEvent(this, new AnswerCheck(this, new GUI(this))), this);
         this.getServer().getPluginManager().registerEvents(new PlayerRestrict(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerKeyRemove(this), this);

@@ -99,23 +99,23 @@ public class AnswerCheck {
             
             if (score >= plugin.getConfig().getInt("passing_grade")){
                 plugin.getPlayersFile().set("pass", plugin.getPlayersFile().getStringList("pass").add(player.getUniqueId().toString()));
-                String message = plugin.getConfig().getString("messages.pass");
+                String message = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.pass"));
                 if (message.contains("%score%")){
                     String replace = message.replace("%score%", "%" + Double.toString(score));
-                    player.sendMessage(plugin.prefix + ChatColor.GREEN + replace);
+                    player.sendMessage(plugin.prefix + replace);
                 } else{
-                    player.sendMessage(plugin.prefix + ChatColor.GREEN + message);
+                    player.sendMessage(plugin.prefix + message);
                 }
                 plugin.getPlayersFile().set(player.getUniqueId().toString(), true);
                 plugin.savePlayersFile();
             } else{
                 failedplayers.add(player);
-                String message = plugin.getConfig().getString("messages.fail");
+                String message = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.fail"));
                 if (message.contains("%score%")) {
                     String replace = message.replace("%score%", "%" + Double.toString(score));
-                    player.sendMessage(plugin.prefix + ChatColor.RED + replace); 
+                    player.sendMessage(plugin.prefix + replace); 
                 }else{
-                    player.sendMessage(plugin.prefix + ChatColor.RED + message);
+                    player.sendMessage(plugin.prefix + message);
                 }
             }
             player.closeInventory();

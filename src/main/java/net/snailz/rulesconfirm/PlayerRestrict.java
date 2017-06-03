@@ -28,8 +28,8 @@ public class PlayerRestrict implements Listener{
         plugin = ins;
         move = plugin.getConfig().getBoolean("restrictions.move.enabled");
         chat = plugin.getConfig().getBoolean("restrictions.chat.enabled");
-        movemessage = ChatColor.RED + plugin.getConfig().getString("restrictions.move.message");
-        chatmessage = ChatColor.RED + plugin.getConfig().getString("restrictions.chat.message");
+        movemessage = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("restrictions.move.message"));
+        chatmessage = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("restrictions.chat.message"));
     }
     
 

@@ -1,5 +1,5 @@
 name: RulesConfrim
-version: 0.1
+version: 0.4
 main: net.snailz.rulesconfirm.RulesConfirm
 author: Snailz
 commands:
@@ -7,8 +7,15 @@ commands:
         permission: rulesconfirm.test
         usage: /rulesconfirm
         description: Start the test to see if you read the rules
+        aliases: [rulestest, test]
 
 permissions:
     rulesconfirm.test:
         description: Allows you to take the test to see if you read the rules
         default: true
+    rulesconfirm.admin:
+        description: Allows access to admin commands
+        default: op
+    rulesconfirm.bypass:
+        description: Allows the player to bypass the restrictions that normal players have before passing the test
+        default: op

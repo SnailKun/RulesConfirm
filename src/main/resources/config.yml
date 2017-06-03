@@ -1,36 +1,35 @@
 #DO NOT CHANGE THIS!!!
-version: 1
+version: 2
 
-################################################
-##COLOR CODES DO NOT WORK IN THIS CONFIG YET!!##
-################################################
-
-prefix: "Rules Confirm"
+prefix: "&4[&aRules Confirm&4]"
 
 messages:
-    pass: "You have passed"
+    pass: "&aYou have passed"
     #Type %score% to insert the score of the player
-    fail: "You have failed. You scored %score%"
+    fail: "&cYou have failed. You scored %score%"
+    #Message that gets sent when a player types an admin command and does not have permission
+    admin_permission: "&4You do not have permission for this command"
 
 restrictions:
     move:
         enabled: true
-        message: "You may not do that until you have taken a test on the rules with /rulesconfirm"
+        message: "&cYou may not do that until you have taken a test on the rules with /rulesconfirm"
     chat:
         enabled: true
-        message: "You may not do that until you have taken a test on the rules with /rulesconfirm"
+        message: "&cYou may not do that until you have taken a test on the rules with /rulesconfirm"
     
 confirm:
     enabled: true
     #in seconds
     time: 5
-    start_timer_message: "You must now wait 5 seconds before taking the test again"
-    end_timer_message: "You may now take the test again"
+    start_timer_message: "&cYou must now wait 5 seconds before taking the test again"
+    end_timer_message: "&aYou may now take the test again"
     #this is sent if the user does /rulesconfirm during there timer
     timer_message: "You must wait before you can take the test again"
 #Percent
 passing_grade: 80
 
+#Color Codes Do Not Work With This!
 test_inventory_title: "Rules Test"
 
 questions:

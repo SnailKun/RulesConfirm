@@ -35,7 +35,7 @@ public class GUI {
         questions_int = plugin.getConfig().getList("questions").size();
     }
     
-    Inventory ConfirmStart = Bukkit.createInventory(null, 54, "Confirm that you would like to start");
+    Inventory ConfirmStart = Bukkit.createInventory(null, 54, "Confirm that you want to start");
     ///////
     //////
     //////
