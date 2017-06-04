@@ -40,24 +40,31 @@ public class RulesConfirmCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("rulesconfirm")) {
-            if (!(sender instanceof Player) && args.length == 0){
+            if (!(sender instanceof Player) && args.length == 0) {
                 sender.sendMessage(plugin.prefix + "This command can only be executed by players!");
                 return true;
             }
-            if (args[0].equalsIgnoreCase("admin")) {
-                if (sender instanceof Player) {
-                    Player player = (Player) sender;
-                    if (!player.hasPermission("rulesconfirm.admin")) {
-                        player.sendMessage(plugin.prefix + ChatColor.translateAlternateColorCodes('&', admin_message));
+            try {
+                if (args[0].equalsIgnoreCase("admin")) {
+                    if (sender instanceof Player) {
+                        Player player = (Player) sender;
+                        if (!player.hasPermission("rulesconfirm.admin")) {
+                            player.sendMessage(plugin.prefix + ChatColor.translateAlternateColorCodes('&', admin_message));
+                            return true;
+                        }
+                    }
+                    try {
+                        cc.adminCommand(args, sender);
                         return true;
+                    } catch (UnsupportedEncodingException ex) {
+                        Logger.getLogger(RulesConfirmCommand.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                try {
-                    cc.adminCommand(args, sender);
-                    return true;
-                } catch (UnsupportedEncodingException ex) {
-                    Logger.getLogger(RulesConfirmCommand.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+
+            }
+            if (!(sender instanceof Player)) {
+                sender.sendMessage(plugin.prefix + "This command can only be executed by players!");
             }
             Player player = (Player) sender;
             if (TestTimer.playertime.containsKey(player)) {

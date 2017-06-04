@@ -40,7 +40,7 @@ public class AdminCommands{
     void add(CommandSender sender, String[] args){
         String new_args = "";
         String answer = "";
-        for (int x = 2; x == args.length - 1; x++){
+        for (int x = 2; x < args.length; x++){
             plugin.getLogger().log(Level.INFO, Integer.toString(args.length - 1));
             plugin.getLogger().log(Level.INFO, "index " + x);
             if (args[x].equalsIgnoreCase("false") || args[x].equalsIgnoreCase("true")){
@@ -48,27 +48,35 @@ public class AdminCommands{
                 plugin.getLogger().log(Level.INFO, "answer " + answer);
                 break;
             }
-            new_args = new_args + " " + args[x];
+            if (new_args.equalsIgnoreCase("")){
+                new_args = args[x];
+            } else{
+                new_args = new_args + " " + args[x];
+            }
             plugin.getLogger().log(Level.INFO, "new args = " + new_args);
         }
-        if (answer.equalsIgnoreCase("")){
-            sender.sendMessage(plugin.prefix + ChatColor.RED + "You must specify an answer with either true or false!");
+        if (answer.equalsIgnoreCase("") || new_args.equalsIgnoreCase("")){
+            sender.sendMessage(plugin.prefix + ChatColor.RED + "You must specify a question and an answer with either true or false!");
             return;
         }
-        plugin.getConfig().getStringList("questions").add(answer + ":" + new_args);
+        ArrayList<String> questions = (ArrayList<String>) plugin.getConfig().getStringList("questions");
+        questions.add(answer + ":" + new_args);
+        plugin.getConfig().set("questions", questions);
+        plugin.saveConfig();
         sender.sendMessage(plugin.prefix + ChatColor.GOLD + new_args + ChatColor.GREEN + " has been added to the question list!");
         
     }
     
     void remove(CommandSender sender, String[] args){
         String new_args = "";
-        for (int x = 2; x == args.length - 1; x++) {
+        for (int x = 2; x < args.length; x++) {
             new_args = new_args + " " + args[x];
         }
         for (String question : plugin.getConfig().getStringList("questions")){
             String [] q_split = question.split(":");
             if (q_split[1].equalsIgnoreCase(new_args)){
                 plugin.getConfig().set("question", plugin.getConfig().getStringList("question").remove(question));
+                plugin.saveConfig();
                 sender.sendMessage(plugin.prefix + ChatColor.GOLD + new_args + ChatColor.GREEN + " has been removed from the question list!");
             }
         }
