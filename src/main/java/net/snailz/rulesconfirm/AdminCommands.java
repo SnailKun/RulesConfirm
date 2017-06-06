@@ -49,19 +49,23 @@ public class AdminCommands{
                 break;
             }
             if (new_args.equalsIgnoreCase("")){
-                new_args = "\"" + args[x];
+                new_args = args[x];
             } else{
                 new_args = new_args + " " + args[x];
             }
             plugin.getLogger().log(Level.INFO, "new args = " + new_args);
         }
-        new_args = new_args + "\"";
-        if (answer.equalsIgnoreCase("") || new_args.equalsIgnoreCase("\"\"")){
+        if (answer.equalsIgnoreCase("") || new_args.equalsIgnoreCase("")){
             sender.sendMessage(plugin.prefix + ChatColor.RED + "You must specify a question and an answer with either true or false!");
             return;
         }
-        List<String> questions = plugin.getConfig().getStringList("questions");
-        questions.add(answer + ":" + new_args);
+        String fullquestion = answer + ":" + new_args;
+        ArrayList<String> questions = new ArrayList<String>();
+        for (String question : plugin.getConfig().getStringList("questions")){
+            questions.add(question);
+        }
+        questions.add(fullquestion);
+        plugin.getConfig().set("questions", questions);
         plugin.saveConfig();
         sender.sendMessage(plugin.prefix + ChatColor.GOLD + new_args + ChatColor.GREEN + " has been added to the question list!");
         
