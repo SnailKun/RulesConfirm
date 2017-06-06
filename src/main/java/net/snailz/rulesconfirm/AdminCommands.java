@@ -67,6 +67,7 @@ public class AdminCommands{
         questions.add(fullquestion);
         plugin.getConfig().set("questions", questions);
         plugin.saveConfig();
+        plugin.reloadConfig();
         sender.sendMessage(plugin.prefix + ChatColor.GOLD + new_args + ChatColor.GREEN + " has been added to the question list!");
         
     }
@@ -74,13 +75,18 @@ public class AdminCommands{
     void remove(CommandSender sender, String[] args){
         String new_args = "";
         for (int x = 2; x < args.length; x++) {
-            new_args = new_args + " " + args[x];
+            if (new_args.equalsIgnoreCase("")) {
+                new_args = args[x];
+            } else {
+                new_args = new_args + " " + args[x];
+            }
         }
         for (String question : plugin.getConfig().getStringList("questions")){
             String [] q_split = question.split(":");
-            if (q_split[1].equalsIgnoreCase(new_args)){
+            if (q_split[1].equalsIgnoreCase(new_args)){;;
                 plugin.getConfig().set("questions", plugin.getConfig().getStringList("questions").remove(question));
                 plugin.saveConfig();
+                plugin.reloadConfig();
                 sender.sendMessage(plugin.prefix + ChatColor.GOLD + new_args + ChatColor.GREEN + " has been removed from the question list!");
             }
         }
